@@ -1,0 +1,22 @@
+{
+  "_source": "IRS Rev. Proc. 2025-32 (2026), IRS Rev. Proc. 2026-35 (2027), IRS Notice 2025-67 / 2026-66, SSA COLA fact sheets. Compiled by PayCalcLab (https://paycalclab.com/).",
+  "2026": {
+    "standard_deduction": {"single": 16100, "married_joint": 32200, "head_of_household": 24150},
+    "brackets_single": [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]],
+    "child_tax_credit": 2200,
+    "social_security": {"rate": 0.062, "wage_base": 184500},
+    "medicare": {"rate": 0.0145, "additional_rate": 0.009, "additional_threshold_single": 200000, "additional_threshold_joint": 250000},
+    "retirement": {"401k": 24500, "401k_catch_up_50": 8000, "401k_catch_up_60_63": 11250, "ira": 7500, "ira_catch_up_50": 1100},
+    "no_tax_on_overtime_max": {"single": 12500, "joint": 25000},
+    "no_tax_on_tips_max": 25000
+  },
+  "2027": {
+    "standard_deduction": {"single": 16600, "married_joint": 33200, "head_of_household": 24925},
+    "brackets_single": [[0, 0.10], [12800, 0.12], [52025, 0.22], [109125, 0.24], [208325, 0.32], [264550, 0.35], [661375, 0.37]],
+    "brackets_married_joint": [[0, 0.10], [25600, 0.12], [104050, 0.22], [218250, 0.24], [416650, 0.32], [529100, 0.35], [793650, 0.37]],
+    "child_tax_credit": 2300,
+    "social_security": {"rate": 0.062, "wage_base": 192300},
+    "retirement": {"401k": 25500, "401k_total_with_catch_up_50": 34000, "ira": 7500, "ira_catch_up_50": 1100, "simple": 17500},
+    "hsa_self_only": 4500
+  }
+}
