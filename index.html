@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>US Paycheck &amp; Tax Data 2026–2027 (Free JSON) | PayCalcLab</title>
+<meta name="description" content="Free machine-readable US federal payroll tax numbers for 2026 and 2027: tax brackets, standard deduction, Social Security wage base, Child Tax Credit, 401(k) and IRA limits.">
+<link rel="canonical" href="https://mrkruhela.github.io/us-paycheck-tax-data/">
+<style>
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:820px;margin:0 auto;padding:32px 20px;color:#1b2333}
+h1{font-size:28px;line-height:1.25;margin:0 0 8px}h2{margin-top:32px;font-size:21px}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #dfe4ec;padding:8px 10px;text-align:left}th{background:#f3f6fa}
+code,pre{background:#f3f6fa;border-radius:6px}pre{padding:14px;overflow:auto}code{padding:1px 5px}
+a{color:#0b7a55}.cta{display:inline-block;background:#0b7a55;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
+footer{margin-top:40px;font-size:14px;color:#5b6679}
+</style>
+</head>
+<body>
+<h1>US Paycheck &amp; Tax Data 2026–2027</h1>
+<p>Free, machine-readable US federal payroll tax numbers for 2026 and 2027, including tax brackets, standard deductions, the Social Security wage base, the Child Tax Credit and 401(k)/IRA limits. Use it in your own payroll scripts, spreadsheets or apps.</p>
+<p><a class="cta" href="https://paycalclab.com/paycheck-calculator/">Try the free paycheck calculator →</a></p>
+
+<h2>Key numbers at a glance</h2>
+<table>
+<tr><th>Item</th><th>2026</th><th>2027</th></tr>
+<tr><td>Standard deduction (single)</td><td>$16,100</td><td>$16,600</td></tr>
+<tr><td>Standard deduction (married filing jointly)</td><td>$32,200</td><td>$33,200</td></tr>
+<tr><td>22% bracket starts (single)</td><td>$50,400</td><td>$52,025</td></tr>
+<tr><td>Social Security wage base</td><td>$184,500</td><td>$192,300</td></tr>
+<tr><td>Child Tax Credit</td><td>$2,200</td><td>$2,300</td></tr>
+<tr><td>401(k) employee limit</td><td>$24,500</td><td>$25,500</td></tr>
+<tr><td>IRA limit</td><td>$7,500</td><td>$7,500</td></tr>
+</table>
+
+<h2>Download the data</h2>
+<p>Everything above (plus full bracket tables for single and married filers) is in one JSON file: <a href="us-tax-data-2026-2027.json"><code>us-tax-data-2026-2027.json</code></a>. Bracket arrays are <code>[threshold, rate]</code> pairs applied to taxable income after the standard deduction.</p>
+
+<h2>Example (JavaScript)</h2>
+<pre><code>const data = require('./us-tax-data-2026-2027.json');
+
+function federalTax(gross, year = '2026') {
+  const y = data[year];
+  const taxable = Math.max(0, gross - y.standard_deduction.single);
+  const b = y.brackets_single;
+  let tax = 0;
+  for (let i = 0; i &lt; b.length; i++) {
+    const [start, rate] = b[i];
+    const end = b[i + 1] ? b[i + 1][0] : Infinity;
+    if (taxable &gt; start) tax += (Math.min(taxable, end) - start) * rate;
+  }
+  return Math.round(tax);
+}</code></pre>
+
+<h2>Calculators and guides</h2>
+<ul>
+<li><a href="https://paycalclab.com/paycheck-calculator/">Paycheck calculator for all 50 states</a></li>
+<li><a href="https://paycalclab.com/take-home-pay-by-state/">Take-home pay by state</a></li>
+<li><a href="https://paycalclab.com/hourly-to-salary-calculator/">Hourly to salary calculator</a></li>
+<li><a href="https://paycalclab.com/blog/">2026 and 2027 tax guides</a></li>
+</ul>
+
+<footer>Data maintained by <a href="https://paycalclab.com/">PayCalcLab</a>. Source code and data on <a href="https://github.com/mrkruhela/us-paycheck-tax-data">GitHub</a>. MIT licensed. Figures are for educational use; confirm with the IRS or SSA before filing.</footer>
+</body>
+</html>
